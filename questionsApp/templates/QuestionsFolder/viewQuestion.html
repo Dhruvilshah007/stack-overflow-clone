@@ -17,7 +17,9 @@
 {% block body%}
 <div class="container" style="margin-top: 50px;">
     <h2 class="text-center">All Questions<h2>
-            <br><br>
+            <a href="/createQuestion">
+                <button type="button" class="btn btn-primary btn-lg float-right my-2" id="askBtn">Ask a
+                    Question</button></a>
 </div>
 
 
@@ -38,10 +40,10 @@
         <tbody>
             {% for i in viewQuestions %}
             <tr>
-                <td> <a href="#">
+                <td> <a href="detailviewQuestion/{{i.question_id}}">
                         {{i.question_title}}
                     </a></td>
-                <td>{{i.question_tags}}</td>
+                <td>{% for area in i.question_tags.all %}<b>#{{ area }} </b>{% endfor %}</td>
                 <td>{{i.created_at}}</td>
                 <td>{{i.question_status}}</td>
             </tr>

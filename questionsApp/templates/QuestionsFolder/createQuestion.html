@@ -1,0 +1,51 @@
+{% extends 'baseNavigation.html' %}
+{% block title %}
+Write questions here
+{% endblock%}
+
+
+
+{% block body %}
+<h1>Create Questions</h1>
+<div class="container">
+
+    <div id="form-main">
+        <div id="form-div">
+            {% comment %} <form class="form" id="form1" method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" placeholder="title">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">body</label>
+                    <textarea class="form-control" id="body" rows="3"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Status</label>
+                    <input type="text" class="form-control" id="status" placeholder="status">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Tag</label>
+                    <input type="text" class="form-control" id="tags" placeholder="Tag">
+                </div>
+
+                <input type="submit" class="btn btn-primary mt-2" value="Ask Question">
+
+            </form> {% endcomment %}
+        <form method="post">
+            {% csrf_token %}
+            {% comment %} {{forms.media}} {% endcomment %}
+            {{forms.as_p}}
+            <input type="submit" class="btn btn-primary mt-2" value="Ask Question">
+        </form>
+
+        </div>
+    </div>
+
+
+    {% endblock %}
+
+    </html>

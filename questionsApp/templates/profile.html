@@ -1,0 +1,24 @@
+{% extends 'baseNavigation.html' %}
+{% block title %}
+Stack Overflow company page-Learn about stack overflow
+{% endblock%}
+
+
+
+{% block body %}
+<h1>Profile page</h1>
+
+
+<h3>All User Data</h3>
+
+<p>
+{% for i in all_user_data %}
+    {{i.question_title}}
+    {{i.question_status}} <br>
+    <a class="btn btn-primary" data-toggle="collapse" href="{{i.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Edit</a>
+    <a class="btn btn-danger" data-toggle="collapse" href="{{i.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Delete</a>
+{% endfor %}
+</p>
+{% endblock %}
+
+</html>

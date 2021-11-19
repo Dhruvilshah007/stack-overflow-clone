@@ -13,9 +13,16 @@ urlpatterns = [
 
 
     path('viewQuestion/', views.viewQuestion, name='viewQuestion'),
+    path('createQuestion/', views.createQuestion, name='createQuestion'),
 
+    path('viewQuestion/detailviewQuestion/<int:qid>', views.detailviewQuestion,
+         name='detailviewQuestion'),
 
-
-
+    #     path('profile/', views.profile,
+    #          name='profile'),
+    path('editQuestion/<int:qid>', views.editQuestion,
+         name='editQuestion'),
+    path('deleteQuestion/<int:qid>', views.deleteQuestion,
+         name='deleteQuestion'),
 
 ]

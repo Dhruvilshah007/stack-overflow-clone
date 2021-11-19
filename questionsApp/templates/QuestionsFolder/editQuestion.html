@@ -1,0 +1,20 @@
+{% extends 'baseNavigation.html' %}
+{% block title %}
+Stack Overflow company page-Learn about stack overflow
+{% endblock%}
+
+
+
+{% block body %}
+<h1>Edit page</h1>
+
+<form method="post">
+{% csrf_token %}
+{{form.as_p}}
+ <input type="submit" class="btn btn-primary mt-2">
+</form>
+
+
+{% endblock %}
+
+</html>

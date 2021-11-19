@@ -1,0 +1,25 @@
+{%extends 'baseNavigation.html'%} {%block css%}
+<style></style>
+
+{% endblock %} {% block body%} {% for k in aw %}
+
+<div>
+  {{k.answer_id}} {{k.created_at}} {{k.answer_body}} {{k.user_answering}}
+  -------- {{k.parent_question.question_id}}
+  {{k.parent_question.question_title}} {{k.parent_question.question_body}}
+</div>
+<br />
+
+{% endfor %}
+
+<form method="post">
+  {% csrf_token %}
+  <div class="form-group mb-2">
+    <label for="staticEmail2" class="sr-only">Answer</label>
+    <input type="text" class="form-control-plaintext" name="answer_body" id="id_answer_body" />
+  </div>
+
+  <input type="submit" class="btn btn-primary mt-2" />
+</form>
+
+{% endblock %}
