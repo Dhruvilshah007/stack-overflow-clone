@@ -1,0 +1,36 @@
+{% extends 'baseNavigation.html' %} {% block title %} SIGNUP PAGE {% endblock%}
+{% block body %}
+<div class="container mt-5">
+  <div class="row center">
+    <div class="col-sm-6 center">
+      <h1>Registration Here</h1>
+      <form action="" method="POST">
+        {% csrf_token %}
+        <label for="">User Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="username"
+          placeholder="Enter UserName"
+        />
+        <label for="">Email Address</label>
+        <input
+          type="email"
+          class="form-control"
+          name="emailid"
+          placeholder="Enter Email Id"
+        />
+        <label for=""> Enter Password</label>
+        <input
+          type="password"
+          class="form-control"
+          name="pwd"
+          placeholder="Enter Password"
+        />
+
+        <input type="submit" class="btn btn-primary mt-2" value="SIGNUP" />
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock body %}
