@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth import login, authenticate, logout
 from django.contrib import messages
-
+from .models import Question
 from django.http import HttpResponse
 
 
@@ -12,6 +12,8 @@ def home(request):
 
 def about(request):
     return render(request, 'about.html')
+
+# Authentication stuff
 
 
 def userSignup(request):
@@ -70,3 +72,14 @@ def userLogout(request):
     logout(request)
     messages.success(request, "Logged Out Succesfully")
     return redirect('/')
+
+
+# Question
+def viewQuestion(request):
+    viewQuestions = Question.objects.all()
+    d = {'viewQuestions': viewQuestions}
+    return render(request, 'QuestionsFolder/viewQuestion.html', d)
+
+# def createQuestion(request):
+# def deleteQuestion(request):
+# def editQuestion(request):
