@@ -6,19 +6,23 @@ Stack Overflow company page-Learn about stack overflow
 
 
 {% block body %}
-<h1>Edit page</h1>
-
-<form method="post">
-{% csrf_token %}
-{{form.media}}
-
-{{form.as_p}} </br>
+<h2 class="text-center my-4">Edit your problem<h2>
 
 
- <input type="submit" class="btn btn-primary mt-2">
-</form>
+        <div class="container">
 
+            <div id="form-main">
+                <div id="form-div">
 
-{% endblock %}
+                    <div class="container">
+                        <form method="post">
+                            {% csrf_token %}
+                            {{form.media}}
+                            {{form.as_p}} </br>
+                            <input type="submit" value="Update Question" class="btn btn-primary mt-2 center">
+                        </form>
+                    </div>
 
-</html>
+                </div>
+            </div>
+            {% endblock %}

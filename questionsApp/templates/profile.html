@@ -6,19 +6,71 @@ Stack Overflow company page-Learn about stack overflow
 
 
 {% block body %}
-<h1>Profile page</h1>
+<h2 class="text-center">Profile Page<h2></h2>
 
 
-<h3>All User Data</h3>
 
-<p>
-{% for i in all_user_data %}
-    {{i.question_title}}
-    {{i.question_status}} <br>
-    <a class="btn btn-primary" href="{% url 'editQuestion' i.question_id %}" role="button">Edit</a>
-    <a class="btn btn-danger" href="{% url 'deleteQuestion' i.question_id %}" role="button">Delete</a> </br>
-{% endfor %}
-</p></br>
-{% endblock %}
 
-</html>
+
+
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.2/css/jquery.dataTables.min.css">
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+    <div class="container">
+        <div class="row header" style="text-align:center;color:green">
+            <h3>All Question asked</h3>
+        </div>
+
+
+        <table id="example" class="table table-striped table-bordered" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Sr No.</th>
+                    <th>Title</th>
+                    <th>Time</th>
+                    <th>Tags</th>
+                    <th>Status</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            {% for i in all_user_data %}
+            <tbody>
+
+                <tr>
+                    <td>{{forloop.counter}}</td>
+                    <td><a href="/viewQuestion/detailviewQuestion/{{i.question_id}}">
+                            {{i.question_title|slice:":20"}}.....</a></td>
+                    <td>{{i.created_at}}</td>
+                    <td>
+                        {% for area in i.question_tags.all %}<b>#{{ area }} </b>{% endfor %}
+                    </td>
+                    <td>{{i.question_status}}</td>
+                    <td><a class="btn btn-primary" href="{% url 'editQuestion' i.question_id %}" role="button">Edit</a>
+                    </td>
+                    <td><a class="btn btn-danger" href="{% url 'deleteQuestion' i.question_id %}"
+                            role="button">Delete</a>
+                    </td>
+                </tr>
+            </tbody>
+            {% endfor %}
+        </table>
+        {% endblock %}
+
+
+        {% block js %}
+        <script>
+            $(document).ready(function () {
+                $('#example').DataTable();
+            });
+        </script>
+
+
+        <script src="  https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script src="  https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script>
+
+
+
+
+        {% endblock %}

@@ -12,5 +12,7 @@ class Question_Form(forms.ModelForm):
             'question_tags'
         )
         widgets = {
-            'question_tags': forms.CheckboxSelectMultiple()
+            'question_tags': forms.CheckboxSelectMultiple(),
+            'question_title': forms.TextInput(attrs={'class': 'form-control'})
+
         }

@@ -6,23 +6,29 @@ Write questions here
 
 
 {% block body %}
-<h1>Create Questions</h1>
-<div class="container">
-
-    <div id="form-main">
-        <div id="form-div">
-           
-        <form method="post">
-            {% csrf_token %}
-            {{forms.media}}
-            {{forms.as_p}}
-            <input type="submit" class="btn btn-primary mt-2" value="Ask Question">
-        </form>
-
-        </div>
-    </div>
+<h2 class="text-center my-4">Write your Problem<h2>
 
 
-    {% endblock %}
+        <div class="container">
 
-    </html>
+            <div id="form-main">
+                <div id="form-div">
+
+                    <div class="container">
+
+                        <form method="post">
+                            {% csrf_token %}
+                            {{forms.media}}
+
+                            {{forms.as_p}}
+
+                            <input type="submit" class="btn btn-primary mt-2" value="Ask Question">
+
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+
+
+            {% endblock %}
