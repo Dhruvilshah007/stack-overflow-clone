@@ -1,0 +1,1 @@
+web: gunicorn Stackoverflow_Clone_Project.wsgi
