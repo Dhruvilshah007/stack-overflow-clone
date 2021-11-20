@@ -8,6 +8,7 @@ from .models import Answer, Question
 from django.http import HttpResponse
 import datetime
 from .forms import Question_Form
+from django.urls import reverse
 
 
 def home(request):
@@ -86,24 +87,6 @@ def viewQuestion(request):
 
 
 def createQuestion(request):
-    # if not request.user.is_authenticated:
-    #     return redirect('/userLogin')
-    # error = ""
-    # if request.method == 'POST':
-    #     questionTitle = request.POST['title']
-    #     questionBody = request.POST['body']
-    #     questionStatus = request.POST['status']
-    #     questionTags = request.POST['tags']
-    #     questionUsername = User.objects.filter(
-    #         Username=request.user.username).first()
-    #     try:
-    #         Question.objects.create(question_author=questionUsername, question_title=questionTitle,
-    #                                 question_body=questionBody, created_at=datetime.datetime.now(), question_status=questionStatus,
-    #                                 question_tags=questionTags)
-    #         error = "no"
-    #     except:
-    #         error = "yes"
-    # d = {'error': error}
 
     if not request.user.is_authenticated:
         return redirect('/userLogin')
@@ -131,47 +114,56 @@ def deleteQuestion(request, qid):
     if not all_user_data:
         return HttpResponse("you have no access")
 
-    obj.delete()
-    return render(request, 'profile.html')
+    all_user_data.delete()
+    return redirect('profile')
 
 
 def editQuestion(request, qid):
+
     obj = get_object_or_404(Question, question_id=qid)
-    all_user_data = Question.objects.filter(
-        question_id=qid, question_author=request.user)
-    if not all_user_data:
-        return HttpResponse("you have no access")
+    if request.method == 'GET':
 
-    form = Question_Form(request.POST or None, instance=obj)
-    if form.is_valid():
-        form.save()
+        form = Question_Form(request.POST or None, instance=obj)
 
+        context = {
+            'form': form
+        }
+        return render(request, "QuestionsFolder/editQuestion.html", context)
+
+    if request.method == 'POST':
+        all_user_data = Question.objects.filter(
+            question_id=qid, question_author=request.user)
+        if not all_user_data:
+            return HttpResponse("you have no access")
+
+        form = Question_Form(request.POST or None, instance=obj)
+        if form.is_valid():
+            form.save()
+
+        return redirect('profile')
+
+
+def profile(request):
+    all_user_questions = Question.objects.filter(question_author=request.user)
     context = {
-        'form': form
+        'all_user_data': all_user_questions
     }
-    return render(request, "QuestionsFolder/editQuestion.html", context)
-
-
-# def profile(request):
-#     all_user_questions = Question.objects.filter(question_author=request.user)
-#     context = {
-#         'all_user_data': all_user_questions
-#     }
-#     return render(request, 'profile.html', context)
+    return render(request, 'profile.html', context)
 
 
 def detailviewQuestion(request, qid):
     soln = Question.objects.get(question_id=qid)
     # print(soln)
-    # answser = Answer.objects.filter(parent_question_id=qid)
+    question_data = Question.objects.filter(question_id=qid)
+    answser = Answer.objects.filter(parent_question_id=qid)
     if request.method == 'GET':
-        aw = Answer.objects.select_related(
-            'parent_question').filter(parent_question_id=qid)
+        # aw = Answer.objects.select_related(
+        #     'parent_question').filter(parent_question_id=qid)
 
         d = {
-            # 'soln': soln,
-            # 'ans': answser,
-            'aw': aw
+            'soln': question_data,
+            'ans': answser,
+            # 'aw': aw
         }
         return render(request, 'QuestionsFolder/detailviewQuestion.html', d)
 
@@ -180,4 +172,4 @@ def detailviewQuestion(request, qid):
 
         Answer.objects.create(
             answer_body=aa, parent_question=soln, user_answering=request.user)
-        return render(request, 'QuestionsFolder/detailviewQuestion.html')
+        return redirect(reverse('detailviewQuestion', kwargs={'qid': qid}))

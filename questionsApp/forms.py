@@ -12,5 +12,5 @@ class Question_Form(forms.ModelForm):
             'question_tags'
         )
         widgets = {
-            'question_tags': forms.SelectMultiple()
+            'question_tags': forms.CheckboxSelectMultiple()
         }

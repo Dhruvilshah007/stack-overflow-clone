@@ -10,7 +10,11 @@ Stack Overflow company page-Learn about stack overflow
 
 <form method="post">
 {% csrf_token %}
-{{form.as_p}}
+{{form.media}}
+
+{{form.as_p}} </br>
+
+
  <input type="submit" class="btn btn-primary mt-2">
 </form>
 

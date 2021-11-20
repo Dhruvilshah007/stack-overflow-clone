@@ -1,22 +1,42 @@
 {%extends 'baseNavigation.html'%} {%block css%}
 <style></style>
 
-{% endblock %} {% block body%} {% for k in aw %}
+{% endblock %} {% block body%}
+
+<h1>Questions</h1>
+{% for k in soln %}
 
 <div>
-  {{k.answer_id}} {{k.created_at}} {{k.answer_body}} {{k.user_answering}}
-  -------- {{k.parent_question.question_id}}
-  {{k.parent_question.question_title}} {{k.parent_question.question_body}}
+  question_id: {{k.question_id}}<br />
+  question_author: {{k.question_author}}<br />
+  question_title: {{k.question_title}}<br />
+  question_body: {{k.question_body | safe}} <br />
+  created_at: {{k.created_at}} <br />
+  question_status: {{k.question_status}} <br />
+
+  {% for area in k.question_tags.all %}question_tags: {{ area }} {% endfor %}
 </div>
 <br />
 
 {% endfor %}
 
+<h2>All Answers</h2>
+
+{% if ans %} {% for i in ans %}<br />
+answer_id: {{i.answer_id}}<br />
+created_at: {{i.created_at}}<br />
+answer_body: {{i.answer_body}}<br />
+user_answering: {{i.user_answering}} {% endfor %} {% endif %}
 <form method="post">
   {% csrf_token %}
   <div class="form-group mb-2">
     <label for="staticEmail2" class="sr-only">Answer</label>
-    <input type="text" class="form-control-plaintext" name="answer_body" id="id_answer_body" />
+    <input
+      type="text"
+      class="form-control-plaintext"
+      name="answer_body"
+      id="id_answer_body"
+    />
   </div>
 
   <input type="submit" class="btn btn-primary mt-2" />

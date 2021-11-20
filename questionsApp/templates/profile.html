@@ -15,10 +15,10 @@ Stack Overflow company page-Learn about stack overflow
 {% for i in all_user_data %}
     {{i.question_title}}
     {{i.question_status}} <br>
-    <a class="btn btn-primary" data-toggle="collapse" href="{{i.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Edit</a>
-    <a class="btn btn-danger" data-toggle="collapse" href="{{i.id}}" role="button" aria-expanded="false" aria-controls="collapseExample">Delete</a>
+    <a class="btn btn-primary" href="{% url 'editQuestion' i.question_id %}" role="button">Edit</a>
+    <a class="btn btn-danger" href="{% url 'deleteQuestion' i.question_id %}" role="button">Delete</a> </br>
 {% endfor %}
-</p>
+</p></br>
 {% endblock %}
 
 </html>

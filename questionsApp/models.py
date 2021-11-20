@@ -14,13 +14,21 @@ class Tags(models.Model):
         return self.tag_name
 
 
+STATUS_CHOICES = (
+    ("Solved", "Solved"),
+    ("Not Solved", "Not Solved"),
+)
+
+
 class Question(models.Model):
     question_id = models.AutoField(primary_key=True)
     question_author = models.ForeignKey(User, on_delete=models.CASCADE)
     question_title = models.CharField(max_length=100, default="")
     question_body = RichTextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now=True)
-    question_status = models.CharField(max_length=15, null=True)
+    question_status = models.CharField(max_length=20,
+                                       choices=STATUS_CHOICES,
+                                       default="Not Solved")
     question_tags = models.ManyToManyField(Tags)
 
     def __str__(self):

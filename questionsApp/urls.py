@@ -18,8 +18,8 @@ urlpatterns = [
     path('viewQuestion/detailviewQuestion/<int:qid>', views.detailviewQuestion,
          name='detailviewQuestion'),
 
-    #     path('profile/', views.profile,
-    #          name='profile'),
+    path('profile/', views.profile,
+         name='profile'),
     path('editQuestion/<int:qid>', views.editQuestion,
          name='editQuestion'),
     path('deleteQuestion/<int:qid>', views.deleteQuestion,
