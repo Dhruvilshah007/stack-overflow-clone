@@ -30,21 +30,29 @@
     </div>
     <div class="card-body">
 
-      <p class="card-text">BODY:{{k.question_body | safe}}</p>
+      <p class="card-text">{{k.question_body | safe}}</p>
 
     </div>
     <div class="card-footer text-muted">
-      {{k.created_at}}
+      <span class="float-left">
+        Tags:<b>{% for q_tag in k.question_tags.all %} {{ q_tag }} {% endfor %}</b>
+      </span>
 
-      {% if k.question_status == 'Not Solved' %}
-      <span class="badge badge-danger">{{k.question_status}}</span>
-      {% else %}
-      <span class="badge badge-success">{{k.question_status}}</span>
-      {%endif%}
+
+
+      <span class="float-right">
+        {{k.created_at}} |
+
+        {% if k.question_status == 'Not Solved' %}
+        <span class="badge badge-danger">{{k.question_status}}</span>
+        {% else %}
+        <span class="badge badge-success">{{k.question_status}}</span>
+        {%endif%}
+
+      </span>
+
     </div>
-    <div class="card-footer text-muted">
-      Tags:<b>{% for q_tag in k.question_tags.all %} {{ q_tag }} {% endfor %}</b>
-    </div>
+
   </div>
 </div>
 <br />

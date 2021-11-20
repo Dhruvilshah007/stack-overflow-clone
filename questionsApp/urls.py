@@ -25,4 +25,10 @@ urlpatterns = [
     path('deleteQuestion/<int:qid>', views.deleteQuestion,
          name='deleteQuestion'),
 
+    path('forgotPassword/', views.ResetPassword,
+         name='forgotPassword'),
+    path('setNewPassword/<uidb64>/<token>', views.setNewPassword,
+         name='setNewPassword'),
+
+
 ]

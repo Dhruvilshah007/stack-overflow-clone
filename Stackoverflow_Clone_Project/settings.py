@@ -27,7 +27,7 @@ SECRET_KEY = 'boqgoo600+9h3^8db4drgv#e_t0k(-)y&^*=0^wnn+zd9)b^kl'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+SITE_ID = 1
 
 # Application definition
 
@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'django.contrib.sites',
     'ckeditor',
 ]
 
@@ -108,7 +110,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -121,3 +124,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# email
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'testdjango990@gmail.com'
+EMAIL_HOST_PASSWORD = 'dhruvil2000'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
